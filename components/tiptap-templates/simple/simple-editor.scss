@@ -1,0 +1,125 @@
+:root {
+  --tt-toolbar-height: 44px;
+}
+
+.simple-editor-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 520px;
+  min-height: 350px;
+  max-height: 75vh;
+
+  /* Editorial Sharp Border & Focus outline */
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 0;
+  background-color: var(--paper, #ffffff);
+  overflow: hidden;
+  transition: border-color 0.15s ease-in-out;
+
+  &:focus-within {
+    border-color: var(--navy, #0f172a);
+  }
+
+  /* Rectangular editorial scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--tt-scrollbar-color, #cbd5e1) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 0.35rem;
+    height: 0.35rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--tt-scrollbar-color, #cbd5e1);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* Sticky Action Toolbar */
+.tiptap-toolbar {
+  flex-shrink: 0;
+  height: var(--tt-toolbar-height);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper, #ffffff);
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.5rem;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+
+  /* Default button resets inside Tiptap Toolbar */
+  button {
+    border-radius: 0 !important;
+    color: var(--navy, #0f172a);
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      background-color: rgba(15, 23, 42, 0.06);
+    }
+
+    &.is-active,
+    &[data-state="on"] {
+      background-color: var(--navy, #0f172a) !important;
+      color: #ffffff !important;
+    }
+  }
+}
+
+.simple-editor-search-and-replace {
+  position: absolute;
+  top: calc(var(--tt-toolbar-height) + 0.5rem);
+  right: 0.5rem;
+  z-index: 51;
+  max-height: calc(100% - var(--tt-toolbar-height) - 1rem);
+  border-radius: 0;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--paper, #ffffff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.simple-editor-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.simple-editor-content .tiptap.ProseMirror.simple-editor {
+  min-height: 100%;
+  padding: 1.25rem 1.5rem 4rem;
+  outline: none;
+
+  color: var(--navy, #0f172a);
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 480px) {
+  .simple-editor-wrapper {
+    height: 420px;
+  }
+
+  .simple-editor-search-and-replace {
+    top: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    max-height: calc(100% - 1rem);
+  }
+
+  .simple-editor-content .tiptap.ProseMirror.simple-editor {
+    padding: 1rem 1rem 3rem;
+    font-size: 0.9375rem;
+  }
+}

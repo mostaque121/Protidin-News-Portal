@@ -1,26 +1,142 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "../styles/_variables.scss";
+@import "../styles/_keyframe-animations.scss";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-navy: var(--navy);
+  --color-teal: var(--teal);
+  --color-gold: var(--gold);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-bangla-serif), serif;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
+:root {
+  /* --- Your existing brand tokens (unchanged) --- */
+  --card: oklch(0.9942 0.0069 88.64);
+  --card-foreground: oklch(0.2784 0.0395 240.06);
+  --primary: oklch(0.5544 0.1869 27.52);
+  --primary-foreground: oklch(0.987 0.0107 76.6);
+  --border: oklch(0.8613 0.0203 77.3);
+  --muted: oklch(0.9103 0.02 77.31);
+  --muted-foreground: oklch(0.5445 0.0058 164.86);
+  --navy: oklch(0.3103 0.0531 237.79);
+  --teal: oklch(0.5276 0.0828 192.77);
+  --gold: oklch(0.7315 0.1329 75.48);
+  --paper: oklch(0.9942 0.0069 88.64);
+  --background: oklch(0.9596 0.0131 82.4);
+  --foreground: oklch(0.2784 0.0395 240.06);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* --- Popovers/dropdowns: same "paper" surface as your cards --- */
+  --popover: oklch(0.9942 0.0069 88.64);
+  --popover-foreground: oklch(0.2784 0.0395 240.06);
+
+  /* --- Secondary: a step deeper than muted, still warm/neutral --- */
+  --secondary: oklch(0.925 0.016 80);
+  --secondary-foreground: oklch(0.2784 0.0395 240.06);
+
+  /* --- Accent (hover/highlight states): soft gold tint, not gray --- */
+  --accent: oklch(0.94 0.028 75.48);
+  --accent-foreground: oklch(0.2784 0.0395 240.06);
+
+  /* --- Destructive: shifted away from primary's hue (27.5) toward a
+     truer, more saturated red so delete/danger actions never read as
+     "just another primary button" --- */
+  --destructive: oklch(0.5 0.22 21);
+  --destructive-foreground: oklch(0.987 0.0107 76.6);
+
+  /* --- Input border: matches --border, very slightly lighter so
+     fields read as "editable" without a harsh outline --- */
+  --input: oklch(0.88 0.018 77.3);
+
+  /* --- Focus ring: tinted with primary instead of neutral gray, so
+     keyboard focus feels native to the theme --- */
+  --ring: oklch(0.62 0.15 27.52);
+
+  /* --- Charts: pulled straight from your existing brand colors +
+     one added sage tone, so a 5-series chart stays legible and
+     on-brand instead of grayscale --- */
+  --chart-1: oklch(0.5544 0.1869 27.52); /* primary (brick) */
+  --chart-2: oklch(0.5276 0.0828 192.77); /* teal */
+  --chart-3: oklch(0.7315 0.1329 75.48); /* gold */
+  --chart-4: oklch(0.3103 0.0531 237.79); /* navy */
+  --chart-5: oklch(0.62 0.12 140); /* sage, for a 5th distinct series */
+
+  --radius: 0.625rem;
+
+  /* --- Sidebar: matches your actual AdminSidebar (navy bg, gold
+     accents, white text, faint white divider) rather than the
+     shadcn-default light-gray sidebar theme --- */
+  --sidebar: oklch(0.3103 0.0531 237.79);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.7315 0.1329 75.48);
+  --sidebar-primary-foreground: oklch(0.3103 0.0531 237.79);
+  --sidebar-accent: oklch(0.38 0.05 237.79);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.7315 0.1329 75.48);
 }
-
-body {
+html {
   background: var(--background);
+}
+body {
+  margin: 0;
+  background: var(--background);
+  font-family:
+    var(--font-noto-serif-bengali), "Calibri", "SutonnyMJ", "Siyamrupali",
+    "Arial", Georgia, "Times New Roman", Times, serif;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.55;
+}
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }
